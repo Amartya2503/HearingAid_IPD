@@ -5,13 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-//import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import MedIcon from '@mui/icons-material/MedicalInformation';
+import PerIcon from '@mui/icons-material/PersonRounded';
 
 const pages = ['Products', 'Pricing', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -40,10 +40,12 @@ const Navbar = () => {
       backgroundColor: 'transparent', // Transparent background
       color: 'blue', // Blue font color
       boxShadow: 'none', // No box shadow
+      paddingLeft: '250px', // Padding from left edge
+      paddingRight: '250px', // Padding from right edge
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: -2 }} />
+          <MedIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: -2, fontSize: '2rem' }} /> {/* Adjust icon size */}
           <IconButton
             size="large"
             aria-label="menu"
@@ -51,9 +53,8 @@ const Navbar = () => {
             aria-haspopup="true"
             onClick={handleOpenNavMenu}
             color="inherit"
-            sx={{ mr: 1 }} // Add margin to the icon
-          >
-          </IconButton>
+            sx={{ mr: 1, p: '8px' }} // Add padding and margin to the icon
+          />
           <Typography
             variant="h6"
             noWrap
@@ -62,8 +63,8 @@ const Navbar = () => {
             sx={{
               mr: 'auto', // Push all elements to the right except HearingHeart
               fontFamily: 'Arial', // Change font to Arial
-              fontWeight: 700,
-              letterSpacing: '.1rem', // Adjusted letter spacing for better readability
+              fontWeight: 600, // Adjust font weight
+              fontSize: '1.2rem', // Adjust font size
               color: 'inherit', // Inherit font color
               textDecoration: 'none',
               '&:hover': {
@@ -71,7 +72,7 @@ const Navbar = () => {
               },
             }}
           >
-            HearingHeart
+            HearingHearts
           </Typography>
 
           <Menu
@@ -99,15 +100,15 @@ const Navbar = () => {
             ))}
           </Menu>
 
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Button key={page} onClick={handleCloseNavMenu} sx={{ mx: 1, fontWeight: 600 }}>{page}</Button> 
+                <Button key={page} onClick={handleCloseNavMenu} sx={{ mx: 1, fontWeight: 500, fontSize: '0.9rem' }}>{page}</Button> 
               ))}
             </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <PerIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: -2, fontSize: '2rem' }} color="primary"/>
               </IconButton>
             </Tooltip>
             <Menu
