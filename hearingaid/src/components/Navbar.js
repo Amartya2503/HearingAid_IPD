@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+//import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = ['Products', 'Pricing', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = ()=> {
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,24 +37,34 @@ const Navbar = ()=> {
 
   return (
     <AppBar position="static" sx={{
-      backgroundColor: 'rgba(11, 127, 171, 0.95)', // Light blue color with transparency
-      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.4)', // Glass shadow effect
+      backgroundColor: 'transparent', // Transparent background
+      color: 'blue', // Blue font color
+      boxShadow: 'none', // No box shadow
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: -2 }} />
+          <IconButton
+            size="large"
+            aria-label="menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
+            sx={{ mr: 1 }} // Add margin to the icon
+          >
+          </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              mr: 'auto', // Push all elements to the right except HearingHeart
+              fontFamily: 'Arial', // Change font to Arial
               fontWeight: 700,
               letterSpacing: '.1rem', // Adjusted letter spacing for better readability
-              color: 'inherit',
+              color: 'inherit', // Inherit font color
               textDecoration: 'none',
               '&:hover': {
                 textDecoration: 'underline',
@@ -64,56 +74,37 @@ const Navbar = ()=> {
             HearingHeart
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'righ',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }}> {/* evenly spaced links */}
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white' }}
-              >
-                {page}
-              </Button>
+              <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Typography variant="body1" fontWeight="bold">{page}</Typography> 
+              </MenuItem>
             ))}
-          </Box>
+          </Menu>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+                <Button key={page} onClick={handleCloseNavMenu} sx={{ mx: 1, fontWeight: 600 }}>{page}</Button> 
+              ))}
+            </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -148,5 +139,4 @@ const Navbar = ()=> {
   );
 };
 
-// export default Navbar;
 export default Navbar;
